@@ -1,11 +1,12 @@
-<?php
-    require_once "MySQLConnector.php";
+<?php        
+require_once "MySQLConnector.php";
+session_start();
 
-    $mysqlSt = "INSERT INTO incidencias (id_incidencia, id_trabajador, id_tecnico, fecha, estado, descripcion, prioridad) 
-    VALUES ('" . $_POST["id_incidencia"] . "', '" . $_POST["id_trabajador"] . "', '" . $_POST["id_tecnico"] . "', '" .  $_POST["fecha"] . "','" . $_POST["estado"] . "', '" . $_POST["descripcion"] . "', '" . $_POST["prioridad"] . "')"; 
 
+    $mysqlSt = "INSERT INTO incidencias ( id_trabajador, id_equipo, fecha, estado, descripcion, prioridad) 
+    VALUES ( '". $_SESSION["id"] . "', '" . $_POST["id_equipo"] . "', '" .  $_POST["fecha"]=date('Y/m/d') . "','" . $_POST["estado"] . "', '" . $_POST["descripcion"] . "', '" . $_POST["prioridad"] . "')"; 
     echo $mysqlSt;
-
+// '" . $_POST["id_incidencia"] . "', '" . $_POST["id_trabajador"] . "',
     $result = mysqli_query($mysql, $mysqlSt);
     
     echo "<br>";

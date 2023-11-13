@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 08-11-2023 a las 10:38:11
+-- Tiempo de generación: 13-11-2023 a las 12:10:10
 -- Versión del servidor: 8.0.31
 -- Versión de PHP: 8.0.26
 
@@ -24,6 +24,26 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `equipos`
+--
+
+DROP TABLE IF EXISTS `equipos`;
+CREATE TABLE IF NOT EXISTS `equipos` (
+  `id_equipo` int NOT NULL AUTO_INCREMENT,
+  `sistema_operativo` varchar(50) NOT NULL,
+  PRIMARY KEY (`id_equipo`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `equipos`
+--
+
+INSERT INTO `equipos` (`id_equipo`, `sistema_operativo`) VALUES
+(1, '[Windows]');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `incidencias`
 --
 
@@ -31,20 +51,37 @@ DROP TABLE IF EXISTS `incidencias`;
 CREATE TABLE IF NOT EXISTS `incidencias` (
   `id_incidencia` int NOT NULL AUTO_INCREMENT,
   `id_trabajador` int NOT NULL,
-  `id_tecnico` int NOT NULL,
+  `id_equipo` int NOT NULL,
   `fecha` date NOT NULL,
   `estado` varchar(50) NOT NULL,
   `descripcion` varchar(50) NOT NULL,
   `prioridad` varchar(50) NOT NULL,
-  PRIMARY KEY (`id_incidencia`)
+  PRIMARY KEY (`id_incidencia`),
+  KEY `id_trabajador` (`id_trabajador`),
+  KEY `id_equipo` (`id_equipo`)
+) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `roles`
+--
+
+DROP TABLE IF EXISTS `roles`;
+CREATE TABLE IF NOT EXISTS `roles` (
+  `role_id` int NOT NULL AUTO_INCREMENT,
+  `role_name` varchar(255) NOT NULL,
+  PRIMARY KEY (`role_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Volcado de datos para la tabla `incidencias`
+-- Volcado de datos para la tabla `roles`
 --
 
-INSERT INTO `incidencias` (`id_incidencia`, `id_trabajador`, `id_tecnico`, `fecha`, `estado`, `descripcion`, `prioridad`) VALUES
-(3, 1, 1, '0000-00-00', 'Pausat', 'Actualitzar drivers', 'Baixa');
+INSERT INTO `roles` (`role_id`, `role_name`) VALUES
+(1, 'Admin'),
+(2, 'Treballador'),
+(3, 'Tecnic');
 
 -- --------------------------------------------------------
 
@@ -55,19 +92,23 @@ INSERT INTO `incidencias` (`id_incidencia`, `id_trabajador`, `id_tecnico`, `fech
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int NOT NULL AUTO_INCREMENT,
+  `role_id` int NOT NULL,
   `nombre` varchar(50) NOT NULL,
   `apellido` varchar(50) NOT NULL,
   `correo` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`id`),
+  KEY `role_id` (`role_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Volcado de datos para la tabla `user`
 --
 
-INSERT INTO `user` (`id`, `nombre`, `apellido`, `correo`, `password`) VALUES
-(1, 'Gerardo', 'Parrillas', 'gparrillas@tx.com', '81dc9bdb52d04dc20036dbd8313ed055');
+INSERT INTO `user` (`id`, `role_id`, `nombre`, `apellido`, `correo`, `password`) VALUES
+(1, 2, 'Gerardo', 'Parrillas', 'gparrillas@tx.com', '81dc9bdb52d04dc20036dbd8313ed055'),
+(2, 3, 'Paco', 'Martinez', 'pmartinez@tx.com', '81dc9bdb52d04dc20036dbd8313ed055'),
+(4, 1, 'admin', 'admin', 'admin@tx.com', '21232f297a57a5a743894a0e4a801fc3');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

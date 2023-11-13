@@ -1,9 +1,9 @@
 <?php
     require_once "MySQLConnector.php";
 
-    $mysqlSt = "INSERT INTO user (nombre, apellido, correo, password) 
-    VALUES ('" . $_POST["nombre"] . "', '" . $_POST["apellido"] . "', '" . $_POST["correo"] . "', '" . hash("md5", $_POST["password"]) . "')"; 
-
+    $mysqlSt = "INSERT INTO user (role_id, nombre, apellido, correo, password) 
+    VALUES ('" . $_POST["role_id"] . "','" . $_POST["nombre"] . "', '" . $_POST["apellido"] . "', '" . $_POST["correo"] . "', '" . hash("md5", $_POST["password"]) . "')"; 
+ 
     echo $mysqlSt;
 
     $result = mysqli_query($mysql, $mysqlSt);

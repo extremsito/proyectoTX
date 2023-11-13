@@ -16,7 +16,6 @@ if (isset($_POST['hidden'])) {
 
 <head>
     <meta charset='UTF-8'>
-    <link rel="stylesheet" href="php.css">
 </head>
 
 <body>
@@ -30,16 +29,20 @@ if (isset($_POST['hidden'])) {
         <form method="POST" action="./interno/insertar_usuarios.php" enctype="multipart/form-data">
             <div id="div1">
             <div>
+                <label for="nombre">ID Rol:</label><br>
+                <input type="text" name="role_id" pattern="[1-3]" title="El rol es del 1 al 3" required>
+            </div>
+            <div>
                 <label for="nombre">Nom:</label><br>
-                <input type="text" name="nombre" required>
+                <input type="text" name="nombre" pattern="[A-Za-z ]+" title="No se puede poner numeros" required>
             </div>
             <div>
                 <label for="nombre">Cognoms:</label><br>
-                <input type="text" name="apellido" required>
+                <input type="text" name="apellido" pattern="[A-Za-z ]+" title="No se puede poner numeros" required>
             </div>
             <div>
                 <label for="nombre">Correu:</label><br>
-                <input type="email" name="correo" required>
+                <input type="email" name="correo" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"  required>
             </div>
 
             <div>
@@ -51,3 +54,6 @@ if (isset($_POST['hidden'])) {
             </div>
             </div>
         </form>
+        
+</body>
+</html>
