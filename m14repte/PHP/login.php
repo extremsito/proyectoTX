@@ -4,8 +4,8 @@ include("./interno/MySQLConnector.php");
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = $_POST["username"];
-    $password = $_POST["password"];
+    $username = addslashes($_POST["username"]);
+    $password = htmlentities ($_POST["password"]);
     $password = md5($password);
     // Realizar una consulta para verificar las credenciales
     $query = "SELECT * FROM user WHERE nombre = '$username' AND password = '$password'";
@@ -30,8 +30,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             echo "Rol no válido.";
         }
-    } else {
-        echo "Credenciales incorrectas.";
+    } 
+
+    else {
+        echo "<script>alert('Credenciales incorrectas'); location.href = '../PHP/login.php';</script>";
     }
 }
 ?>

@@ -1,7 +1,7 @@
 <?php
     $host = "localhost";
     $user = "root";
-    $password = "";
+    $password = "proyectoTX";
     $database = "proyectoteoxavi";
     $port = 3306;
 

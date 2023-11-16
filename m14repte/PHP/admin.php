@@ -4,11 +4,16 @@ session_start();
 if (!$_SESSION['authenticated']) {
     header("Location: login.php");
 }
-
-if (isset($_POST['hidden'])) {
+elseif (isset($_POST['hidden'])) {
     session_destroy();
     header("Location: login.php");
 }
+
+if ($_SESSION['role_id'] !== "1") {
+    echo "<script>alert('No eres admin'); location.href = '../PHP/login.php';</script>";
+    session_destroy();
+}
+
 
 ?>
 
