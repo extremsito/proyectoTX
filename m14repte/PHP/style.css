@@ -8,17 +8,24 @@ html {
     text-align: right;
 }
 
-#logout{
+#logout {
     width: 10%;
     border-radius: 10px;
     padding: 10px;
 }
 
-#logout:hover{
+#logout:hover {
     width: 12%;
     background: rgba(128, 128, 128, 0.396);
     transition: all 0.5s;
 }
+
+#logout a {
+    text-decoration: none;
+    text-transform: uppercase;
+    color: black;
+}
+
 .box {
     width: 40%;
     margin: 5%;
@@ -35,7 +42,9 @@ html {
     text-transform: uppercase;
 }
 
-.box form input, textarea, select {
+.box form input,
+textarea,
+select {
     padding: 10px;
     border-radius: 25px;
     width: 40%;
@@ -52,43 +61,62 @@ html {
     background: rgba(128, 128, 128, 0.396);
     transition: all 0.5s;
 }
-.espai{
+
+.espai {
     margin: 10px;
 }
+
 /* Treballador */
-.inc li{
+.inc li {
     list-style: none;
     display: inline-block;
 }
 
-.inc li{
+.inc li {
     padding: 10px;
     border-radius: 10px;
     border: 2px solid black;
     margin: 0px 5px;
 }
-.left{
+
+.left {
     background: rgba(64, 185, 64, 0.2);
     transition: 0.5s;
 }
 
-.left:hover{
+.left:hover {
     background: rgba(64, 185, 64, 0.6);
     transition: 0.5s;
 }
 
-.right{
+.right {
     background: rgba(222, 58, 58, 0.2);
     transition: 0.5s;
 }
 
-.right:hover{
+.right:hover {
     background: rgba(222, 58, 58, 0.6);
     transition: 0.5s;
 }
-.left a, .right a{
+
+.left a,
+.right a {
     text-decoration: none;
     text-transform: uppercase;
     color: black;
     font-weight: 700;
+}
+
+table{
+    border-collapse: collapse;
+}
+
+table th{
+    background: rgba(128, 128, 128, 0.396);
+    padding: 10px;
+    border: 1px solid black;
+}
+
+table td{
+    border: 1px solid black; 
 }

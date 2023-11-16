@@ -20,16 +20,18 @@ if (isset($_POST['hidden'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <title>Trballador</title>
+    <title>Trabajador</title>
 </head>
 
 <body>
-    <h1>Bienvenido</h1>
-    <?php echo $_SESSION["username"] ?>
-    <form method="POST">
-        <input type="hidden" name="hidden" value="1">
-        <input type="submit" value="Cerrar Sesión">
-    </form>
+    <div id="derecha">
+        <h1>Bienvenido</h1>
+        <?php echo $_SESSION["username"] ?>
+        <form method="POST">
+            <input type="hidden" name="hidden" value="1">
+            <input id="logout" type="submit" value="Cerrar Sesión">
+        </form>
+    </div>
     <center>
         <div class="inc">
             <nav>

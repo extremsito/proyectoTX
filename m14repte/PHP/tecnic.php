@@ -12,68 +12,81 @@ if (isset($_POST['hidden'])) {
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Formulario de Edicion de Incidencias</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>Tecnico</title>
 </head>
+
 <body>
-<h1>Bienvenido,
-        <?php echo $_SESSION['username'] ?> 
+    <div id="derecha">
+        <h1>Bienvenido</h1>
+        <!-- <?php echo $_SESSION['username'] ?> -->
         <form method="POST">
             <input type="hidden" name="hidden" value="1">
-            <input type="submit" value="Cerrar Sesión">
-        </form></h1>
-    <h2>Formulario de Edicion</h2>
-    <nav>
-            <ul>
-                <li><a href="../PHP/interno/mostar_incidencias_ejecucion.php">Incidencias Ejecucion</a></li> 
-                <li><a href="../PHP/interno/mostar_incidencias_finalizado.php">Incidencias Finalizado</a></li>
+            <input id="logout" type="submit" value="Cerrar Sesión">
+        </form>
+    </div>
+    <center>
 
-            </ul>
-        </nav>
-    <form action="./interno/editar_incidencias.php" method="post">
-                <label for="id_incidencia">Id Incidencia:</label>
+        <div class="inc">
+            <nav>
+                <ul>
+                    <li class="left"><a href="../PHP/interno/mostar_incidencias_ejecucion.php">Incidencias en Ejecucion</a></li>
+                    <li class="right"><a href="../PHP/interno/mostar_incidencias_finalizado.php">Incidencias Finalizadas</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="box">
+            <h2>Formulario de Edicion</h2>
+            <form action="./interno/editar_incidencias.php" method="post">
+                <label for="id_incidencia">Id Incidencia:</label><br>
                 <select name="id_incidencia" id="id_incidencia">
-                    <?php 
-                        require_once "./interno/MySQLConnector.php";
-                        $sql = "SELECT * FROM incidencias";
-                        $result = mysqli_query($mysql, $sql);
+                    <?php
+                    require_once "./interno/MySQLConnector.php";
+                    $sql = "SELECT * FROM incidencias";
+                    $result = mysqli_query($mysql, $sql);
 
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            echo "<option value='" . $row['id_incidencia'] . "'>" . $row['id_incidencia'] . ". ";
-                        }
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        echo "<option value='" . $row['id_incidencia'] . "'>" . $row['id_incidencia'] . ". ";
+                    }
                     ?>
                 </select><br><br>
-                
-
-        <label for="estado">Estat:</label>
-        <input list="estados" type="text" name="estado" id="estado" pattern="Ejecucion|Finalizado" required><br><br>
-        <datalist id="estados">
-      <option value="Ejecucion">
-      <option value="Finalizado">
-        </datalist>
-        
-        <label for="descripcion">Descripción:</label><br>
-        <textarea name="descripcion" id="descripcion" rows="4" required></textarea><br><br>
-        
 
 
+                <!-- <label for="estado">Estat:</label> -->
+                <input placeholder="Estado..." list="estados" type="text" name="estado" id="estado" pattern="Ejecucion|Finalizado" required><br><br>
+                <datalist id="estados">
+                    <option value="Ejecucion">
+                    <option value="Finalizado">
+                </datalist>
 
-        <input type="submit" value="Editar incidencia"> <br><br>
-    </form>
-    <form action="./interno/borrar_incidencias.php" method="post">
-    <label for="id_incidencia">Id Incidencia:</label>
+                <label for="descripcion">Descripción:</label><br>
+                <textarea placeholder="Descripción..." name="descripcion" id="descripcion" rows="4" required></textarea><br><br>
+
+                <input type="submit" value="Editar incidencia"> <br><br>
+            </form>
+            <form action="./interno/borrar_incidencias.php" method="post">
+                <label for="id_incidencia">Id Incidencia:</label><br>
                 <select name="id_incidencia" id="id_incidencia">
-                    <?php 
-                        require_once "./interno/MySQLConnector.php";
-                        $sql = "SELECT * FROM incidencias";
-                        $result = mysqli_query($mysql, $sql);
+                    <?php
+                    require_once "./interno/MySQLConnector.php";
+                    $sql = "SELECT * FROM incidencias";
+                    $result = mysqli_query($mysql, $sql);
 
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            echo "<option value='" . $row['id_incidencia'] . "'>" . $row['id_incidencia'] . ". ";
-                        }
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        echo "<option value='" . $row['id_incidencia'] . "'>" . $row['id_incidencia'] . ". ";
+                    }
                     ?>
                 </select><br><br>
                 <input type="submit" value="Borrar incidencia"> <br><br>
-    </form>
+            </form>
+        </div>
+    </center>
 </body>
+
 </html>
