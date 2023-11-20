@@ -5,7 +5,7 @@ session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = addslashes($_POST["username"]);
-    $password = htmlentities ($_POST["password"]);
+    $password = htmlentities($_POST["password"]);
     $password = md5($password);
     // Realizar una consulta para verificar las credenciales
     $query = "SELECT * FROM user WHERE nombre = '$username' AND password = '$password'";
@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (mysqli_num_rows($result) > 0) {
         $usuario = mysqli_fetch_assoc($result);
-        $_SESSION["username"] = $usuario["username"];
+        $_SESSION["username"] = $usuario["nombre"];
         $_SESSION["role_id"] = $usuario["role_id"];
         $_SESSION["id"] = $usuario["id"];
 
@@ -30,9 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             echo "Rol no válido.";
         }
-    } 
-
-    else {
+    } else {
         echo "<script>alert('Credenciales incorrectas'); location.href = '../PHP/login.php';</script>";
     }
 }
@@ -40,6 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -84,8 +83,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         background: rgba(128, 128, 128, 0.396);
         transition: all 0.5s;
     } */
-
 </style>
+
 <body>
     <center>
         <div class="box">

@@ -28,8 +28,9 @@ if ($_SESSION['role_id'] !== "2") {
 
 <body>
     <div id="derecha">
-        <h1>Bienvenido</h1>
-        <?php echo $_SESSION["username"] ?>
+    <h1>Bienvenido
+            <?php echo $_SESSION['username'] ?>
+        </h1>
         <form method="POST">
             <input type="hidden" name="hidden" value="1">
             <input id="logout" type="submit" value="Cerrar Sesión">
@@ -65,7 +66,7 @@ if ($_SESSION['role_id'] !== "2") {
                 </select><br><br>
 
                 <!-- <label for="estado">Estado:</label> -->
-                <input list="estados" type="text" name="estado" id="estado" pattern="Pausado|Ejecucion" placeholder="Estado" required><br><br>
+                <input list="estados" type="text" name="estado" id="estado" pattern="Pausado|Ejecucion" placeholder="Estado"  autocomplete="off" required><br><br>
                 <datalist id="estados">
                     <option value="Pausado">
                     <option value="Ejecucion">
@@ -75,7 +76,7 @@ if ($_SESSION['role_id'] !== "2") {
                 <textarea placeholder="Descripcion del problema" name="descripcion" id="descripcion" rows="4" required></textarea><br><br>
 
                 <!-- <label for="prioridad">Prioridad:</label> -->
-                <input placeholder="Prioridad" list="prioridades" type="text" name="prioridad" id="prioridad" pattern="Alta|Media|Baja" required><br><br>
+                <input placeholder="Prioridad" list="prioridades" type="text" name="prioridad" id="prioridad" pattern="Alta|Media|Baja"  autocomplete="off" required><br><br>
                 <datalist id="prioridades">
                     <option value="Alta">
                     <option value="Media">

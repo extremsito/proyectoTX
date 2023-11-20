@@ -1,10 +1,9 @@
- <?php
+<?php
 session_start();
 
 if (!$_SESSION['authenticated']) {
     header("Location: login.php");
-}
-elseif (isset($_POST['hidden'])) {
+} elseif (isset($_POST['hidden'])) {
     session_destroy();
     header("Location: login.php");
 }
@@ -28,8 +27,9 @@ if ($_SESSION['role_id'] !== "3") {
 
 <body>
     <div id="derecha">
-        <h1>Bienvenido</h1>
-        <!-- <?php echo $_SESSION['username'] ?> -->
+        <h1>Bienvenido
+            <?php echo $_SESSION['username'] ?>
+        </h1>
         <form method="POST">
             <input type="hidden" name="hidden" value="1">
             <input id="logout" type="submit" value="Cerrar Sesión">
@@ -40,8 +40,10 @@ if ($_SESSION['role_id'] !== "3") {
         <div class="inc">
             <nav>
                 <ul>
-                    <li class="left"><a href="../PHP/interno/mostar_incidencias_ejecucion.php">Incidencias en Ejecucion</a></li>
-                    <li class="right"><a href="../PHP/interno/mostar_incidencias_finalizado.php">Incidencias Finalizadas</a></li>
+                    <li class="left"><a href="../PHP/interno/mostar_incidencias_ejecucion.php">Incidencias en
+                            Ejecucion</a></li>
+                    <li class="right"><a href="../PHP/interno/mostar_incidencias_finalizado.php">Incidencias
+                            Finalizadas</a></li>
                 </ul>
             </nav>
         </div>
@@ -52,25 +54,26 @@ if ($_SESSION['role_id'] !== "3") {
                 <select name="id_incidencia" id="id_incidencia">
                     <?php
                     require_once "./interno/MySQLConnector.php";
-                    $sql = "SELECT * FROM incidencias";
+                    $sql = "SELECT * FROM incidencias WHERE estado = 'Ejecucion'";
                     $result = mysqli_query($mysql, $sql);
 
                     while ($row = mysqli_fetch_assoc($result)) {
                         echo "<option value='" . $row['id_incidencia'] . "'>" . $row['id_incidencia'] . ". ";
+                        echo "<value='" . $row['descripcion'] . "'>" . $row['descripcion'] . ". ";
                     }
                     ?>
                 </select><br><br>
-
-
                 <!-- <label for="estado">Estat:</label> -->
-                <input placeholder="Estado..." list="estados" type="text" name="estado" id="estado" pattern="Ejecucion|Finalizado" required><br><br>
+                <input placeholder="Estado..." list="estados" type="text" name="estado" id="estado"
+                    pattern="Ejecucion|Finalizado" autocomplete="off" required><br><br>
                 <datalist id="estados">
                     <option value="Ejecucion">
                     <option value="Finalizado">
                 </datalist>
 
-                <label for="descripcion">Descripción:</label><br>
-                <textarea placeholder="Descripción..." name="descripcion" id="descripcion" rows="4" required></textarea><br><br>
+                <label for="descripcion">Que has hecho para solucionarlo?:</label><br>
+                <textarea placeholder="Solución..." name="descripcion" id="descripcion" rows="4" 
+                    required></textarea><br><br>
 
                 <input type="submit" value="Editar incidencia"> <br><br>
             </form>
@@ -79,7 +82,7 @@ if ($_SESSION['role_id'] !== "3") {
                 <select name="id_incidencia" id="id_incidencia">
                     <?php
                     require_once "./interno/MySQLConnector.php";
-                    $sql = "SELECT * FROM incidencias";
+                    $sql = "SELECT * FROM incidencias WHERE estado ='Finalizado'";
                     $result = mysqli_query($mysql, $sql);
 
                     while ($row = mysqli_fetch_assoc($result)) {

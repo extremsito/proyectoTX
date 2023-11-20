@@ -3,8 +3,7 @@ session_start();
 
 if (!$_SESSION['authenticated']) {
     header("Location: login.php");
-}
-elseif (isset($_POST['hidden'])) {
+} elseif (isset($_POST['hidden'])) {
     session_destroy();
     header("Location: login.php");
 }
@@ -27,68 +26,12 @@ if ($_SESSION['role_id'] !== "1") {
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <title>Admin</title>
 </head>
-<style>
-    /* @import url('https://fonts.googleapis.com/css2?family=Dosis:wght@300&family=Roboto:wght@300&display=swap');
-    /* font-family: 'Dosis', sans-serif;
-    font-family: 'Roboto', sans-serif; */
-    /*html{
-    font-family: 'Roboto', sans-serif;
-    }
-    #derecha{
-        text-align: right;
-    }
-
-    .box {
-        width: 40%;
-        margin: 8%;
-        background: rgba(128, 128, 128, 0.226);
-        border-radius: 50px;
-        padding: 5% 0%;
-        transition: all 1s;
-        box-shadow: 0px 0px 6px black;
-        color: black;
-    }
-
-    .box h2 {
-        font-family: 'Dosis', sans-serif;
-        text-transform: uppercase;
-    }
-
-    .box form input {
-        padding: 10px;
-        border-radius: 25px;
-        width: 40%;
-    }
-
-    #logout{
-        width: 10%;
-        border-radius: 10px;
-        padding: 10px;
-    }
-
-    #logout:hover{
-        width: 12%;
-        background: rgba(128, 128, 128, 0.396);
-        transition: all 0.5s;
-    }
-    #enviar{
-        width: 25%;
-        transition: all 0.2s;
-    }
-
-    #enviar:hover {
-        width: 30%;
-        background: rgba(128, 128, 128, 0.396);
-        transition: all 0.5s;
-    }
-    .espai{
-        margin: 10px;
-    } */
-</style>
 
 <body>
     <div id="derecha">
-        <h1>Bienvenido ADMIN</h1>
+        <h1>Bienvenido
+            <?php echo $_SESSION['username'] ?>
+        </h1>
         <form method="POST">
             <input type="hidden" name="hidden" value="1">
             <input id="logout" type="submit" value="Cerrar Sesión">
@@ -101,7 +44,8 @@ if ($_SESSION['role_id'] !== "1") {
                 <div id="div1">
                     <div>
                         <label for="nombre">ID Rol:</label><br>
-                        <input list="idsroles" type="text" name="role_id" id="role_id" pattern="1-Admin|2-Trabajador|3-Tecnico" autocomplete="off" required><br>
+                        <input list="idsroles" type="text" name="role_id" id="role_id"
+                            pattern="1-Admin|2-Trabajador|3-Tecnico" autocomplete="off" required><br>
                         <datalist id="idsroles">
                             <option value="1-Admin">
                             <option value="2-Trabajador">
@@ -110,11 +54,13 @@ if ($_SESSION['role_id'] !== "1") {
                     </div>
                     <div>
                         <label for="nombre">Nom:</label><br>
-                        <input type="text" name="nombre" pattern="[A-Za-z ]+" title="No se puede poner numeros" required>
+                        <input type="text" name="nombre" pattern="[A-Za-z ]+" title="No se puede poner numeros"
+                            required>
                     </div>
                     <div>
                         <label for="nombre">Cognoms:</label><br>
-                        <input type="text" name="apellido" pattern="[A-Za-z ]+" title="No se puede poner numeros" required>
+                        <input type="text" name="apellido" pattern="[A-Za-z ]+" title="No se puede poner numeros"
+                            required>
                     </div>
                     <div>
                         <label for="nombre">Correu:</label><br>
@@ -127,6 +73,48 @@ if ($_SESSION['role_id'] !== "1") {
                     </div>
                     <div class="espai">
                         <input id="enviar" type="submit" value="Insertar usuario">
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="box">
+
+            <h2>Insertar Equipos</h2>
+            <form method="POST" action="./interno/insertar_equipos.php" enctype="multipart/form-data">
+                <div id="div1">
+                    <div>
+                        <label for="nombre">Sistema Operativo:</label><br>
+                        <input list="sisop" type="text" name="sistema_operativo" id="sistema_operativo"
+                            pattern="Windows|Linux|MacOS" autocomplete="off" required><br>
+                        <datalist id="sisop">
+                            <option value="Windows">
+                            <option value="Linux">
+                            <option value="MacOS">
+                        </datalist>
+                    </div>
+                    <div>
+                        <label for="nombre">Marca:</label><br>
+                        <input type="text" name="marca" pattern="[A-Za-z ]+" title="No se puede poner numeros" autocomplete="off"required>
+                    </div>
+                    <div>
+                        <label for="nombre">Localizacion:</label><br>
+                        <input type="text" name="localizacion" pattern="[A-Za-z0-9.]+"autocomplete="off" required>
+                    </div>
+                    <div>
+                        <label for="nombre">IP:</label><br>
+
+                        <input type="text" name="ip" pattern="([0-9]{1,3}\.){3}[0-9]{1,3}"autocomplete="off"
+                            title="Es una IP" required>
+
+                    </div>
+                    <div>
+                        <label for="nombre">Descripcion:</label><br>
+                        <textarea placeholder="Descripcion del equipo" name="descripcion" id="descripcion" rows="4"
+                            required></textarea><br><br>
+                    </div>
+                    <div class="espai">
+                        <input id="enviar" type="submit" value="Insertar equipo">
                     </div>
                 </div>
             </form>

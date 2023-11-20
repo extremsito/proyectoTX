@@ -30,35 +30,59 @@ table td{
     <?php
     require_once "MySqlConnector.php";
     session_start();
+    $mostrar = $_SESSION["id"];
 
-    $query = "SELECT * FROM incidencias WHERE estado = 'Finalizado'";
-    $result = mysqli_query($mysql, $query);
-    echo "<center>";
-    echo "<table>";
-    echo "<tr>";
-    echo "<th>Id Incidencia</th>";
-    echo "<th>Equipo Afectado</th>";
-    echo "<th>Fecha</th>";
-    echo "<th>Estado</th>";
-    echo "<th>Descripcion</th>";
-    echo "<th>Prioridad</th>";
-    echo "</tr>";
-    while ($row = mysqli_fetch_assoc($result)) {
+    if ($_SESSION["role_id"] == 2) {
+        $query = "SELECT * FROM incidencias WHERE estado = 'Finalizado' AND id_trabajador =$mostrar";
+        $result = mysqli_query($mysql, $query);
+        echo "<center>";
+        echo "<table>";
         echo "<tr>";
-        echo "<td>" . $row['id_incidencia'] . "</td>";
-        echo "<td>" . $row['id_equipo'] . "</td>";
-        echo "<td>" . $row['fecha'] . "</td>";
-        echo "<td>" . $row['estado'] . "</td>";
-        echo "<td>" . $row['descripcion'] . "</td>";
-        echo "<td>" . $row['prioridad'] . "</td>";
+        echo "<th>Id Incidencia</th>";
+        echo "<th>Equipo Afectado</th>";
+        echo "<th>Fecha</th>";
+        echo "<th>Estado</th>";
+        echo "<th>Descripcion</th>";
+        echo "<th>Prioridad</th>";
         echo "</tr>";
-        // echo "<p><b>Id Incidencia:</b> " . $row['id_incidencia'] . "</p>";
-        // echo "<p><b>Equipo afectado:</b> " . $row['id_equipo'] . "</p>";
-        // echo "<p><b>Fecha:</b> " . $row['fecha'] . "</p>";
-        // echo "<p><b>Estado:</b> " . $row['estado'] . "</p>";
-        // echo "<p><b>Descripción:</b> " . $row['descripcion'] . "</p>";
-        // echo "<br>";
+        while ($row = mysqli_fetch_assoc($result)) {
+            echo "<tr>";
+            echo "<td>" . $row['id_incidencia'] . "</td>";
+            echo "<td>" . $row['id_equipo'] . "</td>";
+            echo "<td>" . $row['fecha'] . "</td>";
+            echo "<td>" . $row['estado'] . "</td>";
+            echo "<td>" . $row['descripcion'] . "</td>";
+            echo "<td>" . $row['prioridad'] . "</td>";
+            echo "</tr>";
+        }
+        echo "</table>";
+    } elseif ($_SESSION["role_id"] == 3) {
+        $query = "SELECT * FROM incidencias WHERE estado = 'Finalizado'";
+        $result = mysqli_query($mysql, $query);
+        echo "<center>";
+        echo "<table>";
+        echo "<tr>";
+        echo "<th>Id Incidencia</th>";
+        echo "<th>Equipo Afectado</th>";
+        echo "<th>Fecha</th>";
+        echo "<th>Estado</th>";
+        echo "<th>Descripcion</th>";
+        echo "<th>Prioridad</th>";
+        echo "</tr>";
+        while ($row = mysqli_fetch_assoc($result)) {
+            echo "<tr>";
+            echo "<td>" . $row['id_incidencia'] . "</td>";
+            echo "<td>" . $row['id_equipo'] . "</td>";
+            echo "<td>" . $row['fecha'] . "</td>";
+            echo "<td>" . $row['estado'] . "</td>";
+            echo "<td>" . $row['descripcion'] . "</td>";
+            echo "<td>" . $row['prioridad'] . "</td>";
+            echo "</tr>";
+        }
     }
+
+
+    
     echo "</table>";
     if ($_SESSION["role_id"] == 2) {
     ?>
